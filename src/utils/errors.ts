@@ -1,36 +1,17 @@
 export type ErrorCode =
-  | 'INIT_FAILED'
-  | 'PLAN_GENERATION_FAILED'
-  | 'PLAN_VALIDATION_FAILED'
-  | 'PHASE_EXECUTION_FAILED'
-  | 'VERIFY_FAILED'
-  | 'DRIFT_DETECTED'
-  | 'LLM_PROVIDER_ERROR'
-  | 'STORAGE_ERROR'
-  | 'GIT_ERROR'
-  | 'STATE_CORRUPTED'
-  | 'INVALID_PHASE_ID'
-  | 'CONTEXT_TOO_LARGE'
-  | 'MISSING_PREREQUISITES'
-  | 'PERMISSION_DENIED'
-  | 'NETWORK_ERROR'
-  | 'TIMEOUT'
-  | 'INTERNAL_ERROR';
+  | 'INIT_FAILED' | 'PLAN_GENERATION_FAILED' | 'PLAN_VALIDATION_FAILED'
+  | 'PHASE_EXECUTION_FAILED' | 'VERIFY_FAILED' | 'DRIFT_DETECTED'
+  | 'LLM_PROVIDER_ERROR' | 'STORAGE_ERROR' | 'GIT_ERROR'
+  | 'STATE_CORRUPTED' | 'INVALID_PHASE_ID' | 'CONTEXT_TOO_LARGE'
+  | 'MISSING_PREREQUISITES' | 'PERMISSION_DENIED' | 'NETWORK_ERROR'
+  | 'TIMEOUT' | 'INTERNAL_ERROR';
 
 export class TrayLiteError extends Error {
   public readonly timestamp: string;
-
-  constructor(
-    message: string,
-    public readonly code: ErrorCode,
-    public readonly details?: Record<string, unknown>,
-    public readonly originalError?: unknown
-  ) {
+  constructor(message: string, public readonly code: ErrorCode, public readonly details?: Record<string, unknown>, public readonly originalError?: unknown) {
     super(message);
     this.name = 'TrayLiteError';
     this.timestamp = new Date().toISOString();
-
-    // Maintain prototype chain for instanceof checks
     Object.setPrototypeOf(this, TrayLiteError.prototype);
   }
 }
@@ -56,13 +37,5 @@ export class StorageError extends TrayLiteError {
     super(message, 'STORAGE_ERROR', details);
     this.name = 'StorageError';
     Object.setPrototypeOf(this, StorageError.prototype);
-  }
-}
-
-export class VerificationError extends TrayLiteError {
-  constructor(message: string, details?: Record<string, unknown>) {
-    super(message, 'VERIFY_FAILED', details);
-    this.name = 'VerificationError';
-    Object.setPrototypeOf(this, VerificationError.prototype);
   }
 }
