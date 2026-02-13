@@ -1,0 +1,43 @@
+{
+  "name": "traylite",
+  "version": "0.1.0",
+  "description": "Deterministic planning and orchestration for AI coding agents",
+  "main": "dist/index.js",
+  "bin": {
+    "traylite": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "start": "node dist/cli/index.js"
+  },
+  "keywords": [
+    "ai",
+    "typescript",
+    "cli",
+    "orchestration"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.3",
+    "chalk": "^4.1.2",
+    "commander": "^13.1.0",
+    "glob": "^11.0.1",
+    "openai": "^4.85.1",
+    "ora": "^5.4.1",
+    "uuid": "^11.0.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/node": "^22.13.1",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
